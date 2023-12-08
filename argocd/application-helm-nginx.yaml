@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-helm-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: helm/demo-helm-nginx
+    repoURL: https://github.com/msd05keisuke/manifest-sample
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
